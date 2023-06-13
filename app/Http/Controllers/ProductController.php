@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Services\LikeService;
 
 class ProductController extends Controller
 {
@@ -51,7 +52,7 @@ class ProductController extends Controller
         $comments = Review::where('product_id', $product->id)
             ->get()
             ->toArray();
-        //dd($comments);
+            
         return view('products.show', compact('product', 'comments'));
     }
 
