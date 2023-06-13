@@ -7,10 +7,14 @@ $(document).ready(function (){
       console.log(token)
       $.post('add-comment', {text: text,
           mark:mark,
-          productId:productId,
+          product_id:productId,
           _token: token,
-          }).done(function (response){
+        }).done(function (response){
           console.log(response)
+          response = JSON.parse(response);
+          $("#comments").append(
+            "<div>Mark:"+response.mark+"</div>"+"<div>Comment:"+response.text+"</div>"
+          );
       });
   })
 });
