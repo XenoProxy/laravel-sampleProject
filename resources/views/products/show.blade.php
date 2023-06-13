@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!-- <script src="{{ asset('js/AddLike.js') }}"></script> -->
+<script src="{{ asset('js/AddLike.js') }}"></script>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div id="isLiked" style="display:none;"></div>

@@ -60,6 +60,7 @@ class ProductController extends Controller
             ->get()
             ->toArray();
             $likesNumber = $this->likeService->getLikesNumber($product->id);
+            $likesNumber = (!$likesNumber) ? 0: $likesNumber;
         return view('products.show', compact(
             'product', 
             'comments',
