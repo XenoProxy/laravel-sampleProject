@@ -36,6 +36,17 @@
         </div> 
 
         <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Likes:</strong>
+                <input type="hidden" name="_token" id="like_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="product_id" id="like_product_id" value="{{ $product->id }}">
+                <button id="like">Like</button>
+                <span id="likeField">{{ $likesNumber }}</span>
+            </div>
+        </div>
+        <hr>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Reviews:</strong>
             @foreach($comments as $comment)
             <div class="form-group" id="comments">
