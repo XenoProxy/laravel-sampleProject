@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\ProductUser;
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Services\LikeService as LikeService;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -104,7 +107,16 @@ class ProductController extends Controller
 
     public function like(Request $request)
     {
-        //die('like');
+        $productId = [$request->input('productId')];
+        $isLiked = ProductUser::where('product_id', $productId)
+                                ->where('user_id', Auth::id())
+                                ->get()
+                                ->toArray();
         
+        if(!isset($isLiked[0]['$isLiked'])){
+            // Поставить лайк
+            $user = User::find(Auth::id());
+            //$user->products();
+        }
     }
 }
