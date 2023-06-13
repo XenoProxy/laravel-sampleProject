@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use App\Services\LikeService;
+use App\Http\Services\LikeService as LikeService;
 
 class ProductController extends Controller
 {
+    protected $likeService = null;
+
+    public function __construct(LikeService $likeService)
+    {
+        $this->likeService = $likeService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -52,8 +59,12 @@ class ProductController extends Controller
         $comments = Review::where('product_id', $product->id)
             ->get()
             ->toArray();
-            
-        return view('products.show', compact('product', 'comments'));
+            $likesNumber = $this->likeService->getLikesNumber($product->id);
+        return view('products.show', compact(
+            'product', 
+            'comments',
+            'likesNumber'
+        ));
     }
 
     /**
