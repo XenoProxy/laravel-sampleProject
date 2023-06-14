@@ -113,16 +113,19 @@ class ProductController extends Controller
                                 ->get()
                                 ->toArray();
         
-        if(!isset($isLiked[0]['$isLiked'])){
-            // Поставить лайк
-            $user = User::find(Auth::id());
-            $user->products()->attach($productId, ['isLiked' => 1]);
-            $likesNumber = $this->likeService->getLikesNumber($productId);
-            $response = [
-                'likes' => $likesNumber, 
-                //'message' => 'Liked Successfully'
-            ];
-            echo json_encode($response);
+        $user = User::find(Auth::id());
+
+//==================== Поставить лайк ====================
+        if(!isset($isLiked[0]['$isLiked'])){                     
+            $user->products()->attach($productId, ['isLiked' => 1]);                       
+        } else {
+            $user->products()->detach($productId, Auth::id());            
         }
+        $likesNumber = $this->likeService->getLikesNumber($productId);
+        $response = [
+            'likes' => $likesNumber, 
+            //'message' => 'Liked '
+        ]; 
+        echo json_encode($response);
     }
 }
