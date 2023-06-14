@@ -17,11 +17,9 @@ class StatController extends Controller
 
     public function index()
     {
-        //if(Auth::id() == 2) {
         if(auth()->id() == 2) {
             $product = $this->likeStatService->getStat();
-            //dd($product);
-            return $product;
+            return view('admin.show',compact('product'));
         }
     }
 }
