@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\ProductUser;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Services\LikeService as LikeService;
 use Auth;
@@ -116,7 +116,13 @@ class ProductController extends Controller
         if(!isset($isLiked[0]['$isLiked'])){
             // Поставить лайк
             $user = User::find(Auth::id());
-            //$user->products();
+            $user->products()->attach($productId, ['isLiked' => 1]);
+            $likesNumber = $this->likeService->getLikesNumber($productId);
+            $response = [
+                'likes' => $likesNumber, 
+                'message' => 'Liked Successfully'
+            ];
+            echo json_encode($response);
         }
     }
 }
