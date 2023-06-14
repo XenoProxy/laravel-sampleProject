@@ -24,5 +24,6 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::post('products/add-comment', [App\Http\Controllers\ReviewController::class, 'addComment']);
     Route::post('products/like', [App\Http\Controllers\ProductController::class, 'like']);
+    Route::get('/stat', [App\Http\Controllers\StatController::class, 'index']);
 });
 
