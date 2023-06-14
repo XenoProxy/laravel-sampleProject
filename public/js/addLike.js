@@ -7,7 +7,13 @@ $(document).ready(function(){
         $.post('like', data, function(){
 
         }).done(function(response){
-            console.log(response);
+            let message = JSON.parse(response)
+            //$("#likeField").empty();
+            $("#isLiked").append(message.message)
+            $("#isLiked").show()
+            $('#likeField').empty();
+            $('#likeField').append(message.likes)
+            setTimeout(hide, 3000);
         });
     });
 });

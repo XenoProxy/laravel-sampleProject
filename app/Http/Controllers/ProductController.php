@@ -120,7 +120,7 @@ class ProductController extends Controller
             $likesNumber = $this->likeService->getLikesNumber($productId);
             $response = [
                 'likes' => $likesNumber, 
-                'message' => 'Liked Successfully'
+                //'message' => 'Liked Successfully'
             ];
             echo json_encode($response);
         }

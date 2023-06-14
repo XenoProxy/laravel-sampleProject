@@ -10,7 +10,10 @@ class LikeService
     $userData = DB::table('user_product')
       ->select(DB::raw('count(id) as likes'))
       ->where('product_id', $productId)
-      ->get();
+      ->get()
+      ->toArray();
 
+    //dd($userData[0]->likes);
+    return $userData[0]->likes;
   }
 }
