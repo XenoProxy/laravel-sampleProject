@@ -5,7 +5,8 @@ $(document).ready(function (){
       let productId = $('#product_id').val()
       let token = $('#token').val()
       console.log(token)
-      $.post('add-comment', {text: text,
+      $.post('add-comment', {
+          text: text,
           mark:mark,
           product_id:productId,
           _token: token,
